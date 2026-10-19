@@ -1,0 +1,52 @@
+/* Transitions AMN CONSEIL */
+:root{--ease:cubic-bezier(.22,.61,.36,1)}
+html,body{overflow-x:clip}
+@media (max-width:760px){.js .reveal.reveal-left,.js .reveal.reveal-right{transform:translateY(32px)}}
+/* Barre de progression de lecture */
+#scroll-progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#0A6BB8,#3AA6EC);z-index:1001;pointer-events:none}
+/* En-tête fixe, flouté au défilement */
+header{position:sticky;top:0;z-index:1000;transition:background-color .3s var(--ease),box-shadow .3s var(--ease),backdrop-filter .3s var(--ease)}
+header img{transition:height .3s var(--ease)}
+header.is-scrolled{background:rgba(255,255,255,.85)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 6px 24px rgba(16,21,27,.08)}
+header.is-scrolled img{height:52px!important}
+header nav a:not(.btn){position:relative}
+header nav a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:2px;background:#0A6BB8;transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+header nav a:not(.btn):hover::after,header nav a.is-active::after{transform:scaleX(1)}
+/* Halo animé dans le haut de page */
+#accueil{position:relative;overflow:hidden;isolation:isolate}
+#accueil::before,#accueil::after{content:"";position:absolute;border-radius:50%;filter:blur(80px);z-index:-1;pointer-events:none}
+#accueil::before{width:560px;height:560px;right:-120px;top:-180px;background:rgba(58,166,236,.35);animation:float1 14s ease-in-out infinite alternate}
+#accueil::after{width:420px;height:420px;left:-140px;bottom:-200px;background:rgba(10,107,184,.35);animation:float2 18s ease-in-out infinite alternate}
+@keyframes float1{to{transform:translate(-120px,80px) scale(1.15)}}
+@keyframes float2{to{transform:translate(140px,-60px) scale(.9)}}
+/* Entrée du haut de page */
+.js .hero-in{opacity:0;transform:translateY(24px);animation:heroIn .9s var(--ease) forwards}
+@keyframes heroIn{to{opacity:1;transform:none}}
+/* Apparition au défilement */
+.js .reveal{opacity:0;transform:translateY(32px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.js .reveal.reveal-left{transform:translateX(-40px)}
+.js .reveal.reveal-right{transform:translateX(40px)}
+.js .reveal.is-visible{opacity:1;transform:none}
+/* Survol des cartes */
+.card-hover{transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,21,27,.10)}
+.card-hover svg{transition:transform .5s var(--ease)}
+.card-hover:hover svg{transform:scale(1.08) rotate(-3deg)}
+/* Boutons */
+.btn{transition:transform .25s var(--ease),box-shadow .25s var(--ease),filter .25s var(--ease)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(10,107,184,.30);filter:brightness(1.06)}
+.btn:active{transform:translateY(0)}
+/* FAQ */
+.faq summary span::after{display:inline-block;transition:transform .3s var(--ease)}
+.faq[open] summary span::after{transform:rotate(180deg)}
+.faq[open] p{animation:faqIn .4s var(--ease)}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+/* Champs du formulaire */
+form input,form textarea{transition:border-color .2s,box-shadow .2s}
+form input:focus,form textarea:focus{outline:none;border-color:#0A6BB8!important;box-shadow:0 0 0 4px rgba(10,107,184,.15)}
+/* Accessibilité : mouvement réduit */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal,.js .hero-in{opacity:1!important;transform:none!important}
+}
