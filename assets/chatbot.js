@@ -5,7 +5,7 @@
 
   // Base de réponses : texte (HTML autorisé, contenu maîtrisé) + boutons de suite
   var N={
-    welcome:{t:["Bonjour 👋 Je suis l'assistant d'AMN CONSEIL.","Comment puis-je vous aider ?"],q:'menu'},
+    welcome:{t:["Bonjour 👋 Je suis <b>Izem</b>, l'assistant d'AMN CONSEIL.","Comment puis-je vous aider ?"],q:'menu'},
     menu:{t:["Que souhaitez-vous savoir ?"],q:[
       {label:'Nos expertises',go:'expertises'},{label:'Facturation électronique',go:'einvoice'},
       {label:'Qui est derrière AMN ?',go:'founder'},{label:'Comment se passe une mission ?',go:'mission'},
@@ -22,7 +22,7 @@
     price:{t:["Chaque projet Ivalua est différent : nos interventions sont chiffrées sur devis, selon le périmètre et la durée.","Le plus simple est d'en parler 30 minutes : c'est sans engagement."],q:[RDV,{label:'Contact',go:'contact'},MENU]},
     contact:{t:["Vous pouvez nous joindre directement :","📧 <a href=\"mailto:"+MAIL+"\">"+MAIL+"</a><br>📞 <a href=\""+TEL_LINK+"\">"+TEL+"</a><br>💼 <a href=\""+LI+"\" target=\"_blank\" rel=\"noopener\">LinkedIn</a>","Réponse sous 48 heures ouvrées."],q:[RDV,MENU]},
     rdv:{t:["Parfait ! Je vous emmène vers le formulaire de contact. Indiquez votre besoin en quelques lignes, nous revenons vers vous sous 48 heures ouvrées."],action:'rdv',q:[MENU]},
-    unknown:{t:["Je ne suis qu'un assistant simple et je n'ai pas toutes les réponses 🙂","Pour une question précise, le mieux est d'écrire directement à Abdenour : <a href=\"mailto:"+MAIL+"\">"+MAIL+"</a>"],q:'menu'}
+    unknown:{t:["Je suis un petit robot et je n'ai pas encore réponse à tout 🤖","Pour une question précise, le mieux est d'écrire directement à Abdenour : <a href=\"mailto:"+MAIL+"\">"+MAIL+"</a>"],q:'menu'}
   };
   // Mots-clés pour la saisie libre
   var K=[
@@ -37,24 +37,44 @@
     ['welcome',/^(bonjour|salut|hello|bonsoir|coucou|hey)\b/]
   ];
 
+  // Mascotte Izem (SVG original)
+  function izem(extra){ return '<svg class="izem '+(extra||'')+'" viewBox="0 0 120 142" role="img" aria-label="Izem, le robot d\'AMN CONSEIL">'+
+    '<line x1="60" y1="10" x2="60" y2="26" stroke="#2B2D31" stroke-width="3.5" stroke-linecap="round"/>'+
+    '<circle class="izem-bulb" cx="60" cy="9" r="6.5" fill="#3AA6EC"/>'+
+    '<rect x="11" y="44" width="13" height="22" rx="5" fill="#2B2D31"/><rect x="96" y="44" width="13" height="22" rx="5" fill="#2B2D31"/>'+
+    '<rect x="21" y="25" width="78" height="58" rx="23" fill="#0A6BB8"/>'+
+    '<rect x="31" y="37" width="58" height="34" rx="15" fill="#1F2125"/>'+
+    '<g class="izem-eyes"><ellipse cx="48" cy="52" rx="6" ry="7" fill="#6CE0FF"/><ellipse cx="72" cy="52" rx="6" ry="7" fill="#6CE0FF"/></g>'+
+    '<rect class="izem-mouth" x="53" y="62" width="14" height="3" rx="1.5" fill="#6CE0FF"/>'+
+    '<rect x="52" y="82" width="16" height="8" fill="#2B2D31"/>'+
+    '<g class="izem-arm-l"><rect x="9" y="94" width="14" height="32" rx="7" fill="#2B2D31"/><circle cx="16" cy="128" r="6" fill="#3AA6EC"/></g>'+
+    '<g class="izem-arm-r"><rect x="97" y="94" width="14" height="32" rx="7" fill="#2B2D31"/><circle cx="104" cy="128" r="6" fill="#3AA6EC"/></g>'+
+    '<rect x="24" y="88" width="72" height="50" rx="16" fill="#0A6BB8"/>'+
+    '<rect x="32" y="96" width="56" height="33" rx="8" fill="#FFFFFF"/>'+
+    '<text x="60" y="114" text-anchor="middle" font-family="Sora, sans-serif" font-weight="700" font-size="15" fill="#0A6BB8">AMN</text>'+
+    '<text x="60" y="124" text-anchor="middle" font-family="Sora, sans-serif" font-weight="600" font-size="7.6" letter-spacing=".6" fill="#2B2D31">CONSEIL</text>'+
+    '</svg>'; }
+  function wave(el){ if(!el) return; el.classList.remove('wave'); void el.getBoundingClientRect(); el.classList.add('wave'); }
+
   var css=document.createElement('link'); css.rel='stylesheet'; css.href='assets/chatbot.css'; document.head.appendChild(css);
   var wrap=document.createElement('div');
   wrap.innerHTML=
-   '<button class="amn-chat-toggle" type="button" aria-label="Ouvrir l\'assistant AMN CONSEIL" aria-expanded="false" aria-controls="amn-chat">'+
-     '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span class="amn-dot" aria-hidden="true"></span></button>'+
-   '<div class="amn-chat-teaser" aria-hidden="true">Une question sur Ivalua ? Je vous réponds 👋</div>'+
-   '<div class="amn-chat" id="amn-chat" role="dialog" aria-modal="false" aria-label="Assistant AMN CONSEIL">'+
-     '<div class="amn-chat-head"><div class="amn-chat-avatar" aria-hidden="true">AMN</div><div><div class="amn-chat-title">Assistant AMN CONSEIL</div><div class="amn-chat-sub">Réponse immédiate</div></div>'+
+   '<button class="amn-chat-toggle" type="button" aria-label="Discuter avec Izem, l\'assistant AMN CONSEIL" aria-expanded="false" aria-controls="amn-chat">'+
+     izem('izem-toggle')+'<span class="amn-dot" aria-hidden="true"></span></button>'+
+   '<div class="amn-chat-teaser" aria-hidden="true">Bonjour, je suis Izem 👋 Une question sur Ivalua ?</div>'+
+   '<div class="amn-chat" id="amn-chat" role="dialog" aria-modal="false" aria-label="Izem, assistant AMN CONSEIL">'+
+     '<div class="amn-chat-head"><div class="amn-chat-avatar" aria-hidden="true">'+izem('izem-head')+'</div><div><div class="amn-chat-title">Izem</div><div class="amn-chat-sub">Assistant AMN CONSEIL · en ligne</div></div>'+
      '<button class="amn-chat-close" type="button" aria-label="Fermer l\'assistant"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>'+
      '<div class="amn-chat-body" aria-live="polite"></div>'+
      '<form class="amn-chat-form"><label for="amn-chat-input" style="position:absolute;left:-9999px">Votre question</label><input id="amn-chat-input" type="text" autocomplete="off" placeholder="Posez votre question…" maxlength="300">'+
      '<button type="submit" aria-label="Envoyer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg></button></form>'+
-     '<div class="amn-chat-foot">Assistant automatique · aucune donnée enregistrée</div>'+
+     '<div class="amn-chat-foot">Izem est un assistant automatique · aucune donnée enregistrée</div>'+
    '</div>';
   document.body.appendChild(wrap);
   var toggle=wrap.querySelector('.amn-chat-toggle'), panel=wrap.querySelector('.amn-chat'), body=wrap.querySelector('.amn-chat-body'),
       form=wrap.querySelector('.amn-chat-form'), input=wrap.querySelector('input'), teaser=wrap.querySelector('.amn-chat-teaser'), started=false;
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var head=wrap.querySelector('.izem-head'), tIzem=wrap.querySelector('.izem-toggle');
 
   function scroll(){ body.scrollTop=body.scrollHeight; }
   function bubble(html,who){ var d=document.createElement('div'); d.className='amn-msg '+(who==='user'?'amn-user':'amn-bot'); if(who==='user') d.textContent=html; else d.innerHTML=html; body.appendChild(d); scroll(); return d; }
@@ -66,20 +86,22 @@
     var n=N[key]||N.unknown, i=0;
     (function next(){
       if(i>=n.t.length){ if(n.action==='rdv') setTimeout(goRdv,600); if(n.q) quick(n.q); return; }
+      head.classList.add('talking');
       var typing=bubble('<div class="amn-typing" aria-label="L\'assistant écrit"><span></span><span></span><span></span></div>','bot');
       typing.style.padding='0';
-      setTimeout(function(){ typing.remove(); bubble(n.t[i++],'bot'); next(); }, reduce?0:Math.min(1100,350+n.t[i].length*6));
+      setTimeout(function(){ typing.remove(); head.classList.remove('talking'); bubble(n.t[i++],'bot'); next(); }, reduce?0:Math.min(1100,350+n.t[i].length*6));
     })();
   }
   function goRdv(){ close(); var c=document.getElementById('contact'); if(c){ c.scrollIntoView({behavior:reduce?'auto':'smooth'}); var f=c.querySelector('input'); if(f) setTimeout(function(){f.focus({preventScroll:true});},700);} }
   function match(txt){ var s=txt.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
     var s2=txt.toLowerCase(); for(var i=0;i<K.length;i++){ if(K[i][1].test(s2)||K[i][1].test(s)) return K[i][0]; } return 'unknown'; }
   function open(){ panel.classList.add('open'); toggle.setAttribute('aria-expanded','true'); teaser.classList.remove('show'); toggle.querySelector('.amn-dot').style.display='none';
-    if(!started){ started=true; show('welcome'); } setTimeout(function(){input.focus();},300); }
+    if(!started){ started=true; var intro=document.createElement('div'); intro.className='amn-intro'; intro.innerHTML=izem('izem-big')+'<div class="amn-intro-name">Izem</div><div class="amn-intro-sub">Votre guide AMN CONSEIL</div>'; body.appendChild(intro); setTimeout(function(){wave(intro.querySelector('.izem'));},350); show('welcome'); } else { wave(head); } setTimeout(function(){input.focus();},300); }
   function close(){ panel.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); }
+  toggle.onmouseenter=function(){ wave(tIzem); };
   toggle.onclick=function(){ panel.classList.contains('open')?close():open(); };
   wrap.querySelector('.amn-chat-close').onclick=function(){ close(); toggle.focus(); };
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&panel.classList.contains('open')){ close(); toggle.focus(); } });
   form.onsubmit=function(e){ e.preventDefault(); var v=input.value.trim(); if(!v) return; input.value=''; clearQuick(); bubble(v,'user'); show(match(v)); };
-  setTimeout(function(){ if(!started) { teaser.classList.add('show'); setTimeout(function(){teaser.classList.remove('show');},6000);} },5000);
+  setTimeout(function(){ if(!started) { teaser.classList.add('show'); wave(tIzem); setTimeout(function(){teaser.classList.remove('show');},6000);} },5000);
 })();

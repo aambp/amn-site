@@ -33,3 +33,32 @@
 @keyframes amnDot{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
 @media (max-width:480px){.amn-chat{right:16px;bottom:88px}.amn-chat-toggle{right:16px;bottom:16px}.amn-chat-teaser{display:none}}
 @media (prefers-reduced-motion:reduce){.amn-chat,.amn-msg,.amn-chat-toggle,.amn-typing span{animation:none!important;transition:none!important}}
+/* Izem */
+.izem{display:block;overflow:visible}
+.izem-eyes,.izem-mouth,.izem-arm-l,.izem-arm-r,.izem-bulb{transform-box:fill-box}
+.izem-eyes{transform-origin:center;animation:izemBlink 4.6s infinite}
+.izem-bulb{transform-origin:center;animation:izemBulb 1.8s ease-in-out infinite}
+.izem-mouth{transform-origin:center}
+.izem-arm-r{transform-origin:50% 8%}
+.izem-arm-l{transform-origin:50% 8%}
+.izem.wave .izem-arm-r{animation:izemWave 1.4s ease-in-out}
+.talking .izem-mouth{animation:izemTalk .22s ease-in-out infinite alternate}
+.izem-toggle{width:44px;height:52px;margin-top:4px;animation:izemFloat 3.2s ease-in-out infinite}
+.amn-chat-toggle{width:68px;height:68px;background:#FFFFFF;border:2px solid #E3F1FB;box-shadow:0 12px 30px rgba(10,107,184,.30)}
+.amn-chat-toggle:hover{transform:scale(1.07) rotate(-3deg)}
+.amn-chat-teaser{right:104px;bottom:40px}
+.amn-chat{bottom:104px}
+.amn-chat-avatar{background:#FFFFFF;overflow:hidden}
+.izem-head{width:30px;height:36px;margin-top:6px}
+.amn-intro{display:flex;flex-direction:column;align-items:center;padding:6px 0 10px;animation:amnIn .4s ease}
+.izem-big{width:92px;height:110px;animation:izemFloat 3.2s ease-in-out infinite;filter:drop-shadow(0 10px 14px rgba(10,107,184,.18))}
+.amn-intro-name{font:700 17px 'Sora',sans-serif;color:#1F2125;margin-top:8px}
+.amn-intro-sub{font-size:12.5px;color:#5A5F66}
+@keyframes izemFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes izemBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes izemBulb{0%,100%{fill:#3AA6EC;transform:scale(1)}50%{fill:#6CE0FF;transform:scale(1.18)}}
+@keyframes izemTalk{from{transform:scaleY(1)}to{transform:scaleY(2.6)}}
+@keyframes izemWave{0%,100%{transform:rotate(0)}18%,50%,82%{transform:rotate(-150deg)}34%,66%{transform:rotate(-115deg)}}
+@media (max-width:480px){.amn-chat{bottom:96px}}
+@media (prefers-reduced-motion:reduce){.izem,.izem *{animation:none!important}}
+.amn-chat-toggle .amn-dot{top:2px;right:2px;width:14px;height:14px}
