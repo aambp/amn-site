@@ -50,3 +50,4 @@ form input:focus,form textarea:focus{outline:none;border-color:#0A6BB8!important
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .reveal,.js .hero-in{opacity:1!important;transform:none!important}
 }
+@media (max-width:760px){header{position:relative}}

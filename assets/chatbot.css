@@ -1,0 +1,35 @@
+/* Assistant AMN CONSEIL */
+.amn-chat-toggle{position:fixed;right:24px;bottom:24px;z-index:1100;width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(135deg,#0A6BB8,#3AA6EC);color:#fff;box-shadow:0 12px 30px rgba(10,107,184,.35);display:flex;align-items:center;justify-content:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)}
+.amn-chat-toggle:hover{transform:scale(1.07)}
+.amn-chat-toggle .amn-dot{position:absolute;top:6px;right:6px;width:12px;height:12px;border-radius:50%;background:#34D399;border:2px solid #fff}
+.amn-chat-teaser{position:fixed;right:96px;bottom:34px;z-index:1100;background:#fff;color:#1F2125;padding:10px 14px;border-radius:12px 12px 2px 12px;box-shadow:0 10px 30px rgba(16,21,27,.15);font:500 14px/1.4 'IBM Plex Sans',system-ui,sans-serif;max-width:220px;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s;pointer-events:none}
+.amn-chat-teaser.show{opacity:1;transform:none}
+.amn-chat{position:fixed;right:24px;bottom:96px;z-index:1100;width:370px;max-width:calc(100vw - 32px);height:540px;max-height:calc(100vh - 130px);background:#fff;border-radius:16px;box-shadow:0 24px 60px rgba(16,21,27,.25);display:flex;flex-direction:column;overflow:hidden;font-family:'IBM Plex Sans',system-ui,sans-serif;opacity:0;transform:translateY(16px) scale(.97);transform-origin:bottom right;visibility:hidden;transition:opacity .3s,transform .3s cubic-bezier(.22,.61,.36,1),visibility 0s .3s}
+.amn-chat.open{opacity:1;transform:none;visibility:visible;transition:opacity .3s,transform .3s cubic-bezier(.22,.61,.36,1)}
+.amn-chat-head{background:#1F2125;color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.amn-chat-avatar{width:40px;height:40px;border-radius:50%;background:#3AA6EC;color:#10151B;display:flex;align-items:center;justify-content:center;font:700 12px 'Sora',sans-serif;flex:none}
+.amn-chat-title{font:600 15px/1.2 'Sora',sans-serif}
+.amn-chat-sub{font-size:12px;color:#C9CDD3;display:flex;align-items:center;gap:6px}
+.amn-chat-sub::before{content:"";width:8px;height:8px;border-radius:50%;background:#34D399}
+.amn-chat-close{margin-left:auto;background:none;border:0;color:#fff;cursor:pointer;width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.amn-chat-close:hover{background:rgba(255,255,255,.1)}
+.amn-chat-body{flex:1;overflow-y:auto;padding:18px;background:#F4F7FA;display:flex;flex-direction:column;gap:10px}
+.amn-msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:14.5px;line-height:1.5;animation:amnIn .3s ease}
+.amn-msg a{color:#0A6BB8;font-weight:600}
+.amn-bot{background:#fff;color:#2B2D31;border-bottom-left-radius:4px;align-self:flex-start;box-shadow:0 1px 2px rgba(16,21,27,.06)}
+.amn-user{background:#0A6BB8;color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.amn-typing{display:flex;gap:4px;padding:14px}
+.amn-typing span{width:7px;height:7px;border-radius:50%;background:#9AA3AD;animation:amnDot 1s infinite}
+.amn-typing span:nth-child(2){animation-delay:.15s}.amn-typing span:nth-child(3){animation-delay:.3s}
+.amn-quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.amn-quick button{background:#fff;border:1.5px solid #0A6BB8;color:#0A6BB8;border-radius:999px;padding:8px 14px;font:600 13.5px 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer;transition:background .2s,color .2s;min-height:38px}
+.amn-quick button:hover{background:#0A6BB8;color:#fff}
+.amn-chat-form{display:flex;gap:8px;padding:12px;border-top:1px solid #E3E8EE;background:#fff}
+.amn-chat-form input{flex:1;font:inherit;font-size:15px;padding:11px 14px;border:1px solid #C3CCD5;border-radius:999px;outline:none}
+.amn-chat-form input:focus{border-color:#0A6BB8;box-shadow:0 0 0 3px rgba(10,107,184,.15)}
+.amn-chat-form button{width:44px;height:44px;border-radius:50%;border:0;background:#0A6BB8;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.amn-chat-foot{font-size:11px;color:#5A5F66;text-align:center;padding:0 12px 10px;background:#fff}
+@keyframes amnIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes amnDot{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+@media (max-width:480px){.amn-chat{right:16px;bottom:88px}.amn-chat-toggle{right:16px;bottom:16px}.amn-chat-teaser{display:none}}
+@media (prefers-reduced-motion:reduce){.amn-chat,.amn-msg,.amn-chat-toggle,.amn-typing span{animation:none!important;transition:none!important}}
