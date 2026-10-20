@@ -1,0 +1,24 @@
+---
+layout: base
+title: Actualités
+description: Actualités d'AMN CONSEIL — Ivalua, achats, facturation électronique et intelligence artificielle.
+nav: actualites
+---
+<section class="news-hero">
+<div class="wrap">
+<p class="eyebrow">Actualités</p>
+<h1>Ivalua, achats et facturation électronique : nos actualités.</h1>
+<p class="lead">Retours d'expérience, évolutions réglementaires et nouveautés de l'écosystème Ivalua.</p>
+</div>
+</section>
+<section class="news-list">
+<div class="wrap">
+{% if site.posts.size > 0 %}
+<div class="news-grid">
+{% for post in site.posts %}{% include carte-article.html post=post %}{% endfor %}
+</div>
+{% else %}
+<p>Les premiers articles arrivent bientôt.</p>
+{% endif %}
+</div>
+</section>

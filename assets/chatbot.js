@@ -1,4 +1,5 @@
 (function(){
+  var BASE=(document.currentScript&&document.currentScript.src||'/assets/chatbot.js').replace(/chatbot\.js.*$/,'');
   var MAIL='aam@amn-conseil.fr', TEL='+33 7 82 54 30 86', TEL_LINK='tel:+33782543086',
       LI='https://www.linkedin.com/in/abdenouramroun1/';
   var RDV={label:'Prendre rendez-vous',go:'rdv'}, MENU={label:'Autre question',go:'menu'};
@@ -56,7 +57,7 @@
     '</svg>'; }
   function wave(el){ if(!el) return; el.classList.remove('wave'); void el.getBoundingClientRect(); el.classList.add('wave'); }
 
-  var css=document.createElement('link'); css.rel='stylesheet'; css.href='assets/chatbot.css'; document.head.appendChild(css);
+  var css=document.createElement('link'); css.rel='stylesheet'; css.href=BASE+'chatbot.css'; document.head.appendChild(css);
   var wrap=document.createElement('div');
   wrap.innerHTML=
    '<button class="amn-chat-toggle" type="button" aria-label="Discuter avec Izem, l\'assistant AMN CONSEIL" aria-expanded="false" aria-controls="amn-chat">'+
@@ -92,7 +93,7 @@
       setTimeout(function(){ typing.remove(); head.classList.remove('talking'); bubble(n.t[i++],'bot'); next(); }, reduce?0:Math.min(1100,350+n.t[i].length*6));
     })();
   }
-  function goRdv(){ close(); var c=document.getElementById('contact'); if(c){ c.scrollIntoView({behavior:reduce?'auto':'smooth'}); var f=c.querySelector('input'); if(f) setTimeout(function(){f.focus({preventScroll:true});},700);} }
+  function goRdv(){ close(); var c=document.getElementById('contact'); if(!c){ location.href='/#contact'; return; } if(c){ c.scrollIntoView({behavior:reduce?'auto':'smooth'}); var f=c.querySelector('input'); if(f) setTimeout(function(){f.focus({preventScroll:true});},700);} }
   function match(txt){ var s=txt.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
     var s2=txt.toLowerCase(); for(var i=0;i<K.length;i++){ if(K[i][1].test(s2)||K[i][1].test(s)) return K[i][0]; } return 'unknown'; }
   function open(){ panel.classList.add('open'); toggle.setAttribute('aria-expanded','true'); teaser.classList.remove('show'); toggle.querySelector('.amn-dot').style.display='none';

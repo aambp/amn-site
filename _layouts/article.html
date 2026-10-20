@@ -1,0 +1,35 @@
+---
+layout: base
+---
+<article>
+<section class="news-hero">
+<div class="wrap narrow">
+<a class="back" href="/actualites/">← Toutes les actualités</a>
+<p class="eyebrow">{{ page.categorie | default: "Actualité" }}</p>
+<h1>{{ page.title }}</h1>
+<p class="meta"><time datetime="{{ page.date | date_to_xmlschema }}">{% include date-fr.html date=page.date %}</time> · {{ content | number_of_words | divided_by: 200 | plus: 1 }} min de lecture · Par {{ page.auteur | default: "Abdenour AMROUN" }}</p>
+</div>
+</section>
+{% if page.image %}<div class="wrap narrow"><img class="cover" src="{{ page.image }}" alt="{{ page.image_alt | default: page.title | escape }}"></div>{% endif %}
+<section class="news-body">
+<div class="wrap narrow prose">
+{{ content }}
+</div>
+<div class="wrap narrow">
+<div class="news-cta">
+<div><strong>Un projet Ivalua ou une question sur ce sujet ?</strong><br>Échangeons 30 minutes, sans engagement.</div>
+<a class="btn-primary" href="/#contact">Prendre rendez-vous</a>
+</div>
+<div class="share">Partager : <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url | uri_escape }}" target="_blank" rel="noopener">LinkedIn</a> · <a href="mailto:?subject={{ page.title | uri_escape }}&amp;body={{ page.url | absolute_url | uri_escape }}">Email</a></div>
+</div>
+</section>
+{% assign n = 0 %}{% capture autres %}{% for post in site.posts %}{% if post.url != page.url and n < 2 %}{% include carte-article.html post=post %}{% assign n = n | plus: 1 %}{% endif %}{% endfor %}{% endcapture %}
+{% if n > 0 %}
+<section class="news-more">
+<div class="wrap">
+<h2>À lire aussi</h2>
+<div class="news-grid">{{ autres }}</div>
+</div>
+</section>
+{% endif %}
+</article>

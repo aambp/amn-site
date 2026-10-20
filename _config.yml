@@ -1,0 +1,14 @@
+title: AMN CONSEIL
+description: Conseil et intégration Ivalua — implémentation, intégrations, facturation électronique.
+url: https://www.amn-conseil.fr
+baseurl: ""
+lang: fr
+timezone: Europe/Paris
+markdown: kramdown
+kramdown:
+  input: GFM
+permalink: /actualites/:title/
+exclude: [README.md, CNAME]
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: article, nav: actualites }

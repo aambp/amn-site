@@ -1,0 +1,9 @@
+<a class="news-card" href="{{ include.post.url }}">
+{% if include.post.image %}<img src="{{ include.post.image }}" alt="" loading="lazy">{% else %}<div class="news-card-ph" aria-hidden="true"><span>{{ include.post.categorie | default: "Actualité" }}</span></div>{% endif %}
+<div class="news-card-body">
+<p class="news-card-meta"><span class="tag">{{ include.post.categorie | default: "Actualité" }}</span><time datetime="{{ include.post.date | date_to_xmlschema }}">{% include date-fr.html date=include.post.date %}</time></p>
+<h3>{{ include.post.title }}</h3>
+<p>{{ include.post.description | default: include.post.excerpt | strip_html | truncate: 170 }}</p>
+<span class="more">Lire l'article →</span>
+</div>
+</a>
