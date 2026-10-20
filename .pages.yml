@@ -1,0 +1,34 @@
+# Configuration de l'espace d'administration (Pages CMS — https://pagescms.org)
+media:
+  input: assets/actualites
+  output: /assets/actualites
+  categories: [ image ]
+content:
+  - name: actualites
+    label: Actualités
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [ title, categorie ]
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: description
+        label: Résumé (cartes et aperçu LinkedIn)
+        type: text
+        required: true
+      - name: categorie
+        label: Catégorie
+        type: select
+        default: Ivalua
+        options:
+          values: [ Ivalua, Réglementation, Achats, Intelligence artificielle, AMN CONSEIL, Retour d'expérience ]
+      - name: image
+        label: Image de couverture (facultative)
+        type: image
+      - name: body
+        label: Contenu
+        type: rich-text
